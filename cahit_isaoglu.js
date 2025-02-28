@@ -2,7 +2,6 @@
     const API = "https://gist.githubusercontent.com/sevindi/5765c5812bbc8238a38b3cf52f233651/raw/56261d81af8561bf0a7cf692fe572f9e1e91f372/products.json";
 
     if ($(".product-detail") === 0) {
-        console.log('product-detail öğesi bulunamadı');
         return;
     }
 
@@ -14,7 +13,6 @@
             const response = await fetch(API);
             const data = await response.json();
             localStorage.setItem("products", JSON.stringify(data));
-            console.log("API'den ürünler yüklendi");
             return data;
         } catch (error) {
             console.error("Ürünleri yüklerken hata oluştu:", error);
@@ -61,13 +59,9 @@
             if (favorites.includes(productId)) {
                 favorites = favorites.filter((id) => id !== productId);
                 $(this).removeClass("active").html("🤍");
-                console.log(productId, "removed");
-                console.log(favorites);
             } else {
                 favorites.push(productId);
                 $(this).addClass("active").html("💙");
-                console.log (productId, "added");
-                console.log(favorites);
             }
             localStorage.setItem("favorites", JSON.stringify(favorites));
         });
